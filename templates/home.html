@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Life Story</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        /* Base reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FAFAFA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        /* Material container with shadow */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            margin: 1rem;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            margin-bottom: 1.2rem;
+            color: #3F51B5;
+        }
+
+        /* Material style for input fields */
+        .input-field {
+            position: relative;
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+
+        label {
+            position: absolute;
+            top: 0.6rem;
+            left: 0.8rem;
+            color: #757575;
+            font-size: 1em;
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 1rem 0.8rem;
+            border: 1px solid #BDBDBD;
+            border-radius: 4px;
+            font-size: 1em;
+            outline: none;
+            background-color: #FAFAFA;
+            transition: border 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3F51B5;
+        }
+
+        input[type="text"]:focus + label,
+        input[type="text"]:not(:placeholder-shown) + label {
+            top: -0.8rem;
+            left: 0.7rem;
+            font-size: 0.9em;
+            color: #3F51B5;
+        }
+
+        /* Material button */
+        button {
+            margin-top: 2rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1em;
+            color: white;
+            background-color: #3F51B5;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #303F9F;
+        }
+
+        button:active {
+            transform: scale(0.98);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .error {
+            margin-top: 1rem;
+            color: #F44336;
+            font-size: 1em;
+        }
+
+        .story {
+            margin-top: 2rem;
+            text-align: left;
+        }
+
+        .story h2 {
+            font-size: 1.5em;
+            margin-bottom: 0.5rem;
+            color: #3F51B5;
+        }
+
+        .story p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            label {
+                font-size: 1em;
+            }
+
+            input[type="text"], button {
+                font-size: 1em;
+            }
+
+            .story h2 {
+                font-size: 1.3em;
+            }
+
+            .story p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Create Your Life Story</h1>
+        <form method="post" action="/">
+            <div class="input-field">
+                <input type="text" id="name" name="name" required maxlength="100" placeholder=" ">
+                <label for="name">Your Full Name</label>
+            </div>
+
+            <div class="input-field">
+                <input type="text" id="location" name="location" maxlength="100" placeholder=" ">
+                <label for="location">Location (Optional)</label>
+            </div>
+
+            <button type="submit">Generate Story</button>
+        </form>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        {% if story %}
+            <div class="story">
+                <h2>Your Life Story</h2>
+                <p>{{ story | safe }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
