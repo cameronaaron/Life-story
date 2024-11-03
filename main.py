@@ -138,7 +138,7 @@ class LLMServiceRepository(LLMServiceRepositoryInterface):
         }
         url = f"{settings.CLOUDFLARE_AI_GATEWAY_URL}/openai/chat/completions"  # Adjust endpoint as needed
         payload = {
-            "model": "gpt-4",
+            "model": "chatgpt-4o-latest",
             "messages": self._create_story_messages(data),
             "temperature": 0.7,
             "max_tokens": 1000
