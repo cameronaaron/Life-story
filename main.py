@@ -268,3 +268,7 @@ async def generate_life_story(
         return templates.TemplateResponse(
             "home.html", {"request": request, "story": "", "error": "An unexpected error occurred."}
         )
+# Run the application locally if the script is executed directly
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
