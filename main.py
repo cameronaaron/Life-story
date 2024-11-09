@@ -206,7 +206,7 @@ class StoryGenerationService(StoryGenerationServiceInterface):
         likelihood = enrichment_response.get("likelihood", 0)
         person_data = enrichment_response["data"]
 
-        if likelihood < 5:
+        if likelihood < 3:
             logger.error("Low confidence in match. Please provide more information for better results.")
             raise HTTPException(status_code=400, detail="Low confidence in match. Please provide more information for better results.")
 
